@@ -11,12 +11,13 @@ func hello(w http.ResponseWriter, req *http.Request) {
 func headers(w http.ResponseWriter, req *http.Request) {
 	for name, headers := range req.Header {
 		for _, h := range headers {
-			fmt.Fprint(w, "%v :%v\n", name, h)
+			fmt.Fprintf(w, "%v :%v\n", name, h)
 		}
 	}
 }
 func main() {
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
+	fmt.Println("Server is running at http://localhost:8090")
 	http.ListenAndServe(":8090", nil)
 }
